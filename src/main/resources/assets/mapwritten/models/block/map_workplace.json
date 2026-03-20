@@ -1,0 +1,8 @@
+{
+	"loader": "neoforge:obj",
+	"model": "mapwritten:models/block/map_workplace.obj",
+	"automatic_culling": true,
+	"shade_quads": true,
+	"flip_v": true,
+	"emissive_ambient": true
+}
