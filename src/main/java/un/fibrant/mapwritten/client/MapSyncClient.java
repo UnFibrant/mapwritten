@@ -36,7 +36,7 @@ public final class MapSyncClient {
 
     public static boolean uploadCurrentMap(String mapId, String mapName) {
         // Force PageManager to flush all pending saves to disk before reading files
-        flushMapwrightBuffers();
+        hitMapwrightPageManagerWithAToyHammer();
 
         if (isMapwrightStillSaving()) {
             Mapwritten.LOG.debug("[{}] Map files are still being saved by Mapwright. Please wait a moment and try again.", Mapwritten.MODID);
@@ -212,8 +212,8 @@ public final class MapSyncClient {
 
         return Files.isDirectory(activePath) ? activePath : null;
     }
-
-    private static void flushMapwrightBuffers() {
+    // Friendly reference. Flushes PageManager pending saves
+    private static void hitMapwrightPageManagerWithAToyHammer() {
         try {
             final var pageManager = Class.forName("wawa.mapwright.MapwrightClient")
                     .getDeclaredField("PAGE_MANAGER");
